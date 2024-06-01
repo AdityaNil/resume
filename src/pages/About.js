@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import abtimg from '../assets/abtimg.jpg';
 import resume from '../assets/resume.pdf';
 
