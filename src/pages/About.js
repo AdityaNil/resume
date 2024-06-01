@@ -4,8 +4,6 @@ import abtimg from '../assets/abtimg.jpg';
 import resume from '../assets/resume.pdf';
 
 const About = () => {
-  const navigate = useNavigate();
-
   const download = () => {
     const link = document.createElement('a');
     link.href = resume;
