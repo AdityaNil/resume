@@ -1,56 +1,100 @@
-import React from 'react'
-import { useNavigate} from 'react-router-dom'
-const Navbar = () => {
-  const Navigate=useNavigate()
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { device } from '../styles/Media';
 
-  const clickabout = () =>{
-    Navigate('/About')
-  }
-  const clickhome = () =>{
-    Navigate('/')
-  }
-  const clickcertificate = () =>{
-    Navigate('/certificates')
-  }
-  const clickeducation = () =>{
-    Navigate('/education')
-  }
-  const clickcontact = () =>{
-    Navigate('/contact')
-  }
+const Navbar = () => {
+  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = (path) => {
+    navigate(path);
+    setIsOpen(false);
+  };
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-        <div style={styles.navbar}>
-            <div style={styles.navbarname}>
-                <h2>Aditya <span style={{color:'#5AB2FF'}}>Anand</span></h2>
-            </div>
-            <div style={styles.navbarcompo}>
-                <h3 onClick={clickhome} style={{cursor:'pointer'}}>Home</h3>
-                <h3 onClick={clickabout} style={{cursor:'pointer'}}>About</h3>
-                <h3 onClick={clickcertificate} style={{cursor:'pointer'}}>Certificates</h3>
-                <h3 onClick={clickeducation} style={{cursor:'pointer'}}>Education</h3>
-                <h3 onClick={clickcontact} style={{cursor:'pointer'}}>Contact</h3>
-            </div>
-        </div>    
-  )
-}
-const styles = {
-    navbar: {
-        display: 'flex',
-        fontSize:'17px',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        backgroundColor: 'white',
-        paddingLeft: '25px',
-      },
-      navbarname: {
-        paddingLeft: '10px',
-      },
-      navbarcompo: {
-        display: 'flex',
-        paddingRight:'80px',
-        gap: '50px',
-      }
-}
+    <StyledNavbar>
+      <div style={{display:'inline-flex'}}>
+      <NavbarName>
+        <h2>
+          Aditya <span style={{ color: '#5AB2FF' }}>Anand</span>
+        </h2>
+      </NavbarName>
+      <Hamburger onClick={toggleMenu}>
+        <span />
+        <span />
+        <span />
+      </Hamburger>
+      </div>
+      <NavbarCompo isOpen={isOpen}>
+        <h3 onClick={() => handleClick('/')}>Home</h3>
+        <h3 onClick={() => handleClick('/About')}>About</h3>
+        <h3 onClick={() => handleClick('/certificates')}>Certificates</h3>
+        <h3 onClick={() => handleClick('/education')}>Education</h3>
+        <h3 onClick={() => handleClick('/contact')}>Contact</h3>
+      </NavbarCompo>
+    </StyledNavbar>
+  );
+};
 
-export default Navbar
+const StyledNavbar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 0px 25px 0px 25px;
+  position: relative;
+
+  @media ${device.tablet} {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`;
+
+const NavbarName = styled.div`
+  padding-left: 10px;
+`;
+
+const Hamburger = styled.div`
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 24px;
+  width: 30px;
+
+  span {
+    background-color: black;
+    height: 3px;
+    width: 100%;
+  }
+
+  @media ${device.tablet} {
+    display: flex;
+    margin-top:25px;
+    margin-left:100px;
+  }
+`;
+
+const NavbarCompo = styled.div`
+  display: flex;
+  gap: 50px;
+  padding-right: 80px;
+
+  @media ${device.tablet} {
+    flex-direction: column;
+    gap: 20px;
+    padding-right: 0;
+    display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
+  }
+
+  @media ${device.mobileL} {
+    gap: 10px;
+  }
+`;
+
+export default Navbar;
