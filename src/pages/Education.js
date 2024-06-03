@@ -1,25 +1,132 @@
-import React from 'react'
-import educate from '../assets/educate.png'
+import React from 'react';
+import educate from '../assets/educate.png';
+import styled from 'styled-components';
+import { device } from '../styles/Media';
 
 const Education = () => {
   return (
-    <div style={{backgroundColor: "#FEFAF6",marginTop: '-25px',marginBottom:'25px'}}>
-      <h1 style={{ textAlign: 'center', fontSize: '50px' }}><u>Education</u></h1>
-      <div style={{display:'inline-flex',paddingLeft:'25vh',gap:'20vh'}}>
-        <div>
-            <img src={educate} alt='loading' />
-        </div>
-        <div >
-          <h2>COLLEGE/SCHOOL</h2>
+    <StyledEducation>
+      <Heading><u>Education</u></Heading>
+      <Content>
+        <ImageContainer>
+          <StyledImage src={educate} alt="loading" />
+        </ImageContainer>
+        <Details>
+          <SchoolHeading>COLLEGE/SCHOOL</SchoolHeading>
           <ul>
-          <li><h3 style={{color:'red'}}>Chandigarh University</h3><span>May 2021 - Present</span> <br/> Bachelor of Engineering  8.04 CGPA</li>
-          <li><h3 style={{color:'red'}}>Lucknow Public School & College</h3><span>Mar 2020 - Apr 2021</span><br/> Intermediate  81.2%</li>
-          <li><h3 style={{color:'red'}}>St.Xavier's School</h3><span>Mar 2018 - Apr 2019</span><br/> Matriculation  81.3%</li>
+            <ListItem>
+              <SchoolName>Chandigarh University</SchoolName>
+              <Date>May 2021 - Present</Date>
+              <Description>Bachelor of Engineering 8.04 CGPA</Description>
+            </ListItem>
+            <ListItem>
+              <SchoolName>Lucknow Public School & College</SchoolName>
+              <Date>Mar 2020 - Apr 2021</Date>
+              <Description>Intermediate 81.2%</Description>
+            </ListItem>
+            <ListItem>
+              <SchoolName>St.Xavier's School</SchoolName>
+              <Date>Mar 2018 - Apr 2019</Date>
+              <Description>Matriculation 81.3%</Description>
+            </ListItem>
           </ul>
-        </div>
-      </div>
-    </div>
-  )
-}
+        </Details>
+      </Content>
+    </StyledEducation>
+  );
+};
 
-export default Education
+const StyledEducation = styled.div`
+  background-color: #FEFAF6;
+  background-size:cover;
+  margin-top: -25px;
+  padding: 0 10vh 15.5vh 10vh;
+
+  @media ${device.tablet} {
+    padding: 0 2vh 1vh 2vh;
+  }
+
+  @media ${device.mobileL} {
+    padding: 0 2vh 1vh 2vh;
+  }
+`;
+
+const Heading = styled.h1`
+  text-align: center;
+  font-size: 50px;
+
+  @media ${device.tablet} {
+    font-size: 40px;
+  }
+
+  @media ${device.mobileL} {
+    font-size: 30px;
+  }
+`;
+
+const Content = styled.div`
+  display: inline-flex;
+  padding-left: 25vh;
+  gap: 20vh;
+
+  @media ${device.tablet} {
+    flex-direction: column;
+    align-items: center;
+    padding-left: 0;
+    gap: 5vh;
+    font-size:2.03vh;
+  }
+
+  @media ${device.mobileL} {
+    gap: 2vh;
+    font-size:2vh;
+  }
+`;
+
+const ImageContainer = styled.div`
+  @media ${device.tablet} {
+    text-align: center;
+  }
+`;
+
+const StyledImage = styled.img`
+  width: 100%;
+  height: auto;
+
+  @media ${device.tablet} {
+    width: 70%;
+  }
+
+  @media ${device.mobileL} {
+    width: 70%;
+  }
+`;
+
+const Details = styled.div`
+  @media ${device.tablet} {
+    text-align: center;
+  }
+`;
+
+const SchoolHeading = styled.h2`
+  margin-bottom: 20px;
+`;
+
+const ListItem = styled.li`
+  margin-bottom: 20px;
+`;
+
+const SchoolName = styled.h3`
+  color: red;
+`;
+
+const Date = styled.span`
+  display: block;
+  margin-bottom: 5px;
+`;
+
+const Description = styled.div`
+  margin-top: 5px;
+`;
+
+export default Education;

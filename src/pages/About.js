@@ -35,23 +35,19 @@ const About = () => {
 
 const StyledAbout = styled.div`
   background-color: #FEFAF6;
-  padding-left: 160px;
-  padding-right: 160px;
-  margin-top: -25px;
+  padding: 0 160px;
+  margin-top: -3vh;
 
   @media ${device.laptopL} {
-    padding-left: 80px;
-    padding-right: 80px;
+    padding: 0 80px;
   }
 
   @media ${device.tablet} {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding: 0 40px;
   }
 
   @media ${device.mobileL} {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 0 20px;
   }
 `;
 
@@ -69,7 +65,7 @@ const Heading = styled.h1`
 `;
 
 const Container = styled.div`
-  display: inline-flex;
+  display: flex;
   gap: 40px;
   margin-top: 20px;
 
@@ -86,8 +82,8 @@ const StyledImage = styled.img`
   width: 70vh;
 
   @media ${device.tablet} {
-    height: 50vh;
-    width: 50vh;
+    height: 40vh;
+    width: 40vh;
   }
 
   @media ${device.mobileL} {

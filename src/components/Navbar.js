@@ -75,8 +75,8 @@ const Hamburger = styled.div`
 
   @media ${device.tablet} {
     display: flex;
-    margin-top:25px;
-    margin-left:100px;
+    margin-top:3vh;
+    margin-left:15vh;
   }
 `;
 
