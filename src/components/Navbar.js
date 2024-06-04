@@ -20,7 +20,7 @@ const Navbar = () => {
     <StyledNavbar>
       <div style={{display:'inline-flex'}}>
       <NavbarName>
-        <h2>
+        <h2 onClick={ () => handleClick('/')}>
           Aditya <span style={{ color: '#5AB2FF' }}>Anand</span>
         </h2>
       </NavbarName>
