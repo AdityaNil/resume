@@ -1,17 +1,38 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import conta from '../assets/conta.jpg';
 import styled from 'styled-components';
 import { device } from '../styles/Media';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm('service_qgid29t', 'template_sbpb32i', form.current, 'zQBILJmE152qrvA5i')
+      .then(
+        () => {
+          console.log('SUCCESS!');
+          alert('Message sent successfully');
+          form.current.reset(); 
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+          alert('Failed to send message');
+        }
+      );
+  };
+
   return (
     <StyledContact>
       <Heading><u>Contact</u></Heading>
-      <Form>
-        <StyledInput type="text" placeholder="Name" />
-        <StyledInput type="email" placeholder="Email" />
-        <StyledTextarea placeholder="Text Here..." />
-        <StyledButton type="button" value="Send" />
+      <Form ref={form} onSubmit={sendEmail}>
+        <StyledInput type="text" name="name" placeholder="Name" required />
+        <StyledInput type="email" name="email" placeholder="Email" required />
+        <StyledTextarea name="message" placeholder="Text Here..." required />
+        <StyledButton type="submit" value="Send" />
       </Form>
     </StyledContact>
   );
@@ -23,13 +44,11 @@ const StyledContact = styled.div`
   background-position: center;
   padding: 10vh 0;
   font-size: 4vh;
-  //height: 70%;
   min-height: 73.5vh;
   margin-top: -25px;
 
   @media ${device.tablet} {
     font-size: 3vh;
-    
   }
 
   @media ${device.mobileL} {
@@ -92,6 +111,7 @@ const StyledTextarea = styled.textarea`
   border: 0.3vh solid green;
   resize: none;
   font-size: 2vh;
+  
   @media ${device.tablet} {
     height: 5vh;
     width: 30vh;
@@ -111,6 +131,7 @@ const StyledButton = styled.input`
   padding: 1vh;
   border: 0.3vh solid green;
   background-color: white;
+  
   @media ${device.tablet} {
     height: 8vh;
     width: 15vh;
