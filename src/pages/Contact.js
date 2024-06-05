@@ -30,7 +30,7 @@ const Contact = () => {
       <Heading><u>Contact</u></Heading>
       <Form ref={form} onSubmit={sendEmail}>
         <StyledInput type="text" name="name" placeholder="Name" required />
-        <StyledInput type="email" name="email" placeholder="Email" required />
+        <StyledInput type="email" name="from_name" placeholder="Email" required />
         <StyledTextarea name="message" placeholder="Text Here..." required />
         <StyledButton type="submit" value="Send" />
       </Form>
