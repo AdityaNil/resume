@@ -29,7 +29,7 @@ const Contact = () => {
     <StyledContact>
       <Heading><u>Contact</u></Heading>
       <Form ref={form} onSubmit={sendEmail}>
-        <StyledInput type="text" name="name" placeholder="Name" required />
+        <StyledInput type="text" name="sender_name" placeholder="Name" required />
         <StyledInput type="email" name="from_name" placeholder="Email" required />
         <StyledTextarea name="message" placeholder="Text Here..." required />
         <StyledButton type="submit" value="Send" />
