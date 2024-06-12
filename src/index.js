@@ -24,6 +24,10 @@ root.render(
     <RouterProvider router={router} />
   </React.StrictMode>
 );
+fetch('./netlify/functions/server')
+  .then(response => response.json())
+  .then(data => console.log(data));
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
