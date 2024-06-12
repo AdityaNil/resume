@@ -1,17 +1,34 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import {styled} from 'styled-components';
 import conta from '../assets/conta.jpg';
-import styled from 'styled-components';
 import { device } from '../styles/Media';
 import emailjs from '@emailjs/browser';
+import axios from 'axios';
 
 const Contact = () => {
   const form = useRef();
+  const [ipInfo, setIpInfo] = useState(null);
+
+  useEffect(() => {
+    axios.get('https://ipinfo.io?token=4f4422d2d70199')
+      .then(response => {
+        setIpInfo(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching IP info:', error);
+      });
+  }, []);
 
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm('service_qgid29t', 'template_sbpb32i', form.current, 'zQBILJmE152qrvA5i')
+    const formData = new FormData(form.current);
+    if (ipInfo) {
+      formData.append('ip', ipInfo.ip);
+      formData.append('location', JSON.stringify(ipInfo));
+    }
+
+    emailjs.sendForm('service_qgid29t', 'template_sbpb32i', form.current, 'zQBILJmE152qrvA5i')
       .then(
         () => {
           console.log('SUCCESS!');
@@ -23,6 +40,20 @@ const Contact = () => {
           alert('Failed to send message');
         }
       );
+
+    // Send data to backend
+    axios.post(`http://localhost:5000/api/saveContact`, {
+      name: formData.get('sender_name'),
+      email: formData.get('from_name'),
+      message: formData.get('message'),
+      ip: ipInfo?.ip,
+      location: ipInfo
+    }).then(() => {
+      console.log('Data saved to database');
+      console.log(formData);
+    }).catch(error => {
+      console.error('Error saving data to database:', error);
+    });
   };
 
   return (
@@ -37,7 +68,6 @@ const Contact = () => {
     </StyledContact>
   );
 };
-
 const StyledContact = styled.div`
   background-image: url(${conta});
   background-size: cover;
