@@ -42,7 +42,7 @@ const Contact = () => {
       );
 
     // Send data to backend
-    axios.post(`http://localhost:5000/api/saveContact`, {
+    axios.post(`https://your-backend-service-url.onrender.com/api/saveContact`, {
       name: formData.get('sender_name'),
       email: formData.get('from_name'),
       message: formData.get('message'),
